@@ -5,16 +5,23 @@ import { Image } from "../models/index.js";
 
 const image = Router();
 
-image.get("/:image_id", (req, res) => {});
+image.get("/:image_id", async (req, res) => {
+  const imageId = req.params.image_id;
+  const image = await Image.findById(imageId).lean();
+  if (image) {
+    res.render("partials/images", { image });
+  } else {
+    res.status(404).send("Image not found");
+  }
+});
 
 image.post("/", (req, res) => {
-
   const saveImage = async () => {
     const name = randomName();
     const images = await Image.find({ filename: name });
     console.log(images);
     if (images.length > 0) {
-      return saveImage()
+      return saveImage();
     } else {
       const imgTempPath = req.file.path;
       console.log(imgTempPath);
@@ -30,7 +37,7 @@ image.post("/", (req, res) => {
           description: req.body.description,
         });
         const savedImage = await newImg.save();
-        res.send("ok")
+        res.send("ok");
       } else {
         await fs.promises.unlink(imgTempPath);
         res
