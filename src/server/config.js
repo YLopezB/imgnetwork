@@ -27,7 +27,7 @@ export const config = (app) => {
   );
 
   // Handlebars as the view
-  app.set("view engine", ".hbs");
+  app.set("view engine", "hbs");
 
   // Middleware
   app.use(morgan("dev"));
@@ -39,7 +39,7 @@ export const config = (app) => {
   app.use("/", index);
 
   // Static files
-  app.use(express.static(path.join(__dirname, "../public/uploads/temp")));
+  app.use(express.static(path.join(__dirname, "../public")));
 
   return app;
 };
