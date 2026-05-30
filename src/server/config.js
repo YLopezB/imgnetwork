@@ -5,11 +5,11 @@ import { helpers } from "./helpers.js";
 import morgan from "morgan";
 import multer from "multer";
 import express from "express";
-import { routes } from "../routes/index.js";
+import index from "../routes/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const upload = multer({ dest: path.join(__dirname, "public/uploads") });
+const upload = multer({ dest: path.join(__dirname, "/public/uploads") });
 
 export const config = (app) => {
   app.set("port", process.env.PORT || 3000);
@@ -35,7 +35,7 @@ export const config = (app) => {
   app.use(express.json());
 
   // Routes
-  routes(app);
+  app.use("/", index);
 
   // Static files
   app.use(express.static(path.join(__dirname, "../public")));
