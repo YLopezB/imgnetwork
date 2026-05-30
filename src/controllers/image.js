@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { randomName } from "../helpers/libs.js";
 import fs from "fs";
-import { Image } from "../models/index.js";
+import { Image, Comment } from "../models/index.js";
+import md5 from "md5";
 
 const image = Router();
 
@@ -48,8 +49,22 @@ image.post("/", (req, res) => {
   };
   return saveImage();
 });
+
 image.post("/:image_id/like", (req, res) => {});
-image.post("/:image_id/comment", (req, res) => {});
+
+image.post("/:image_id/comment", async (req, res) => {
+  const avatar = md5(req.body.email);
+  const params = req.params.image_id;
+  const newComment = await Comment.create({
+    image_id: params,
+    name: req.body.name,
+    email: req.body.email,
+    gravatar: avatar,
+    comment: req.body.comment,
+  });
+  res.redirect(`/images/${params}`);
+});
+
 image.delete("/:image_id", (req, res) => {});
 
 export default image;
