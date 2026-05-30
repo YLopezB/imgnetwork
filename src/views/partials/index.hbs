@@ -1,0 +1,34 @@
+<div class="card">
+    <divc class="card-header bg-dark">
+        <h3 class="card-title text-white">
+            <i class="fa fa-file-image-o"> Carga tu imagen</i>
+        </h3>
+    </divc>
+
+    <div class="card-body">
+        <form action="/images" method="POST">
+            <div class="mb-3">
+                <div class="input-group">
+                    <input
+                        type="file"
+                        name="image"
+                        class="form-control"
+                        id="inputGroup"
+                        aria-describedby="inputGroupFileAddon04"
+                        required>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <input type="text" name="title" class="form-control" placeholder="Título de la imagen" required>
+            </div>
+            <div class="form-group mb-3">
+                <textarea name="description" rows="2" class="form-control" placeholder="Descripción de la imagen" required></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <button class="btn btn-success">
+                    Sube tu imagen
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

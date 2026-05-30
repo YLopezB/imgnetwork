@@ -8,12 +8,13 @@ import express from "express";
 import index from "../routes/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
+console.log("ruta filename: ", __filename);
 const __dirname = path.dirname(__filename);
-const upload = multer({ dest: path.join(__dirname, "/public/uploads") });
+const upload = multer({ dest: path.join(__dirname, "../public/uploads") });
 
 export const config = (app) => {
   app.set("port", process.env.PORT || 3000);
-  app.set("views", path.join(__dirname, "views"));
+  app.set("views", path.join(__dirname, "../views"));
   app.engine(
     ".hbs",
     engine({
