@@ -1,0 +1,17 @@
+version: '5.1'
+
+services:
+  server:
+    container_name: server
+    ports:
+      - '3000:3000'
+    build: .
+    command: npm run dev
+    volumes:
+      - .:/app
+
+  mongoDB:
+    image: mongo
+    container_name: mongoDB
+    ports:
+      - '27017:27017'
